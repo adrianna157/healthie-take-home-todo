@@ -1,6 +1,7 @@
 import {useContext, useEffect, useState} from "react";
 import TaskContext from "../TaskContext.js";
 import TaskStatusSection from "./TaskStatusSection.jsx";
+import ListTaskContext from "../ListTaskContext.js";
 
 const ListTask = () => {
     const {tasks} = useContext(TaskContext)
@@ -20,13 +21,15 @@ const ListTask = () => {
     const statuses = ["todo", "in-progress", "done"]
 
     return (
-        <div className="flex gap-16">
-            {statuses.map((status, index) => {
-                return (
-                    <TaskStatusSection key={index} status={status} />
-                )
-            })}
-        </div>
+        <ListTaskContext.Provider value={{toDos, inProgress, done}}>
+            <div className="flex gap-16">
+                {statuses.map((status, index) => {
+                    return (
+                        <TaskStatusSection key={index} status={status} />
+                    )
+                })}
+            </div>
+        </ListTaskContext.Provider>
     )
 }
 
