@@ -15,6 +15,10 @@ const CreateList = () => {
 
         if (task.name === "") return showToastMessage("fail")
 
+        if (task.name.length < 5) return showToastMessage("fail", "Task name should be at least 5 characters")
+
+        if (task.name.length > 100) return showToastMessage("fail", "Task name should not exceed 50 characters")
+
         setTasks((prev) => {
             const list = [...prev, task]
 
