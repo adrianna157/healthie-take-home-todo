@@ -1,7 +1,7 @@
-const TaskStatusSection = () => {
+const TaskStatusSection = ({status}) => {
     return (
         <div>
-        <h2>Status</h2>
+            <h1 className="text-2xl font-bold">{status}</h1>
         </div>
     );
 }
