@@ -11,21 +11,21 @@ const ListTask = () => {
 
     useEffect(() => {
         const toDos = tasks.filter((task) => task.status === "todo")
-        const inProgress = tasks.filter((task) => task.status === "in-progress")
+        const inProgress = tasks.filter((task) => task.status === "inProgress")
         const done = tasks.filter((task) => task.status === "done")
         setToDos(toDos)
         setInProgress(inProgress)
         setDone(done)
     }, [tasks])
 
-    const statuses = ["todo", "in-progress", "done"]
+    const statuses = ["todo", "inProgress", "done"]
 
     return (
         <ListTaskContext.Provider value={{toDos, inProgress, done}}>
             <div className="flex gap-16">
                 {statuses.map((status, index) => {
                     return (
-                        <TaskStatusSection key={index} status={status} />
+                        <TaskStatusSection key={index} status={status}/>
                     )
                 })}
             </div>

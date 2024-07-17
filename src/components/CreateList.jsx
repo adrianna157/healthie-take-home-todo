@@ -3,7 +3,7 @@ import {useContext, useState} from "react";
 import {v4 as uuidv4} from "uuid";
 
 const CreateList = () => {
-    const {tasks, setTasks, showToastMessage} = useContext(TaskContext)
+    const {setTasks, showToastMessage} = useContext(TaskContext)
     const [task, setTask] = useState({
         id: "",
         name: "",

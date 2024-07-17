@@ -2,8 +2,14 @@ import Header from "./Header.jsx";
 import {useContext} from "react";
 import ListTaskContext from "../ListTaskContext.js";
 import Task from "./Task.jsx";
+import {useDroppable} from "@dnd-kit/core";
+import {SortableContext, verticalListSortingStrategy} from "@dnd-kit/sortable";
+
 
 const TaskStatusSection = ({status}) => {
+    const {setNodeRef} = useDroppable({
+        id: status,
+    })
 
     const {toDos, inProgress, done} = useContext(ListTaskContext)
 
@@ -12,25 +18,29 @@ const TaskStatusSection = ({status}) => {
     let bg = "bg-slate-500"
     let tasksToMap = toDos
 
-    if(status === "todo") {
+    if (status === "todo") {
         text = "To Do"
         bg = "bg-red-500"
         tasksToMap = toDos
     }
-    if(status === "in-progress") {
+    if (status === "inProgress") {
         text = "In Progress"
         bg = "bg-yellow-500"
         tasksToMap = inProgress
     }
-    if(status === "done") {
+    if (status === "done") {
         text = "Done"
         bg = "bg-green-500"
         tasksToMap = done
     }
+
+
     return (
-        <div className={`w-64`}>
+        <div ref={setNodeRef} className={`w-64`}>
             <Header text={text} bg={bg} count={tasksToMap.length}/>
-            {tasksToMap.length > 0 && tasksToMap.map((task) => <Task key={task.id} task={task}/> )}
+            <SortableContext items={tasksToMap} strategy={verticalListSortingStrategy}>
+                {tasksToMap.length > 0 && tasksToMap.map((task) => <Task key={task.id} task={task}/>)}
+            </SortableContext>
         </div>
     );
 }
